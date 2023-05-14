@@ -16,17 +16,20 @@ class AdventureScene extends Phaser.Scene {
         this.h = this.game.config.height;
         this.s = this.game.config.width * 0.01;
 
-        this.cameras.main.setBackgroundColor('#444');
+        //main background
+        this.cameras.main.setBackgroundColor('#ddd');
         this.cameras.main.fadeIn(this.transitionDuration, 0, 0, 0);
 
-        this.add.rectangle(this.w * 0.75, 0, this.w * 0.25, this.h).setOrigin(0, 0).setFillStyle(0);
+        //makes side bar (x, y, width, height).()
+        this.add.rectangle(this.w * 0.75, 0, this.w * 0.25, this.h).setOrigin(0, 0).setFillStyle("0x0404dd");
         this.add.text(this.w * 0.75 + this.s, this.s)
             .setText(this.name)
             .setStyle({ fontSize: `${3 * this.s}px` })
             .setWordWrapWidth(this.w * 0.25 - 2 * this.s);
         
+        //message box in side bar
         this.messageBox = this.add.text(this.w * 0.75 + this.s, this.h * 0.33)
-            .setStyle({ fontSize: `${2 * this.s}px`, color: '#eea' })
+            .setStyle({ fontSize: `${2 * this.s}px`, color: '#fff' })
             .setWordWrapWidth(this.w * 0.25 - 2 * this.s);
 
         this.inventoryBanner = this.add.text(this.w * 0.75 + this.s, this.h * 0.66)
