@@ -130,7 +130,7 @@ class Down extends AdventureScene {
             });
         this.add.text(this.w * 0.3, this.h * 0.8, "📺",{fontSize: `${8 * this.s}px`})
             .setInteractive()
-            .on('pointerover', () => this.showMessage("head back"));
+            .on('pointerover', () => this.showMessage("hmmm no cable"));
 
         let tape = this.add.text(this.w * 0.6, this.w * 0.2, '📼',{fontSize: `${2 * this.s}px`})
             .setInteractive()

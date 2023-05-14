@@ -1,4 +1,4 @@
-A simple adventure game by {who?} based on a simple adventure game engine by [Adam Smith](https://github.com/rndmcnlly).
+A simple adventure game by Oliver Mason based on a simple adventure game engine by [Adam Smith](https://github.com/rndmcnlly).
 
 Code requirements:
 - **4+ scenes based on `AdventureScene`**: unsatisfied (name at least 4 of the classes).
@@ -8,14 +8,14 @@ Code requirements:
     - Enhancement 2: unsatisfied (name the method and explain the use of it).
 
 Experience requirements:
-- **4+ locations in the game world**: unsatisfied (name at least 4 of the classes).
-- **2+ interactive objects in most scenes**: unsatisfied (describe two examples)
-- **Many objects have `pointerover` messages**: unsatisfied (describe two examples)
-- **Many objects have `pointerdown` effects**: unsatisfied (describe two examples)
-- **Some objects are themselves animated**: unsatisfied (describe two examples)
+- **4+ locations in the game world**: satisfied (5 rooms: main, left, bottom, right, top).
+- **2+ interactive objects in most scenes**: satisfied (every room has an exit/return door and another thing to interact with: wizard, cupcake, VHS tape)
+- **Many objects have `pointerover` messages**: satisfied (all items/text that are included: bathtub= "you", doors tell you where you're going)
+- **Many objects have `pointerdown` effects**: unsatisfied (most objects have some effect. wizard and cupcake add an inventory item, tape triggers an animation)
+- **Some objects are themselves animated**: unsatisfied (tape, fade out on some objects)
 
 Asset sources:
-- (For each image/audio/video asset used, describe how it was created. What tool did you use to create it? Was it based on another work? If so, how did you change it, and where can we learn more about the original work for comparison? Use [Markdown link syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#links).)
+- All assets are emojis
 
 Code sources:
 - `adventure.js` and `index.html` were created for this project [Adam Smith](https://github.com/rndmcnlly) and edited by me.
