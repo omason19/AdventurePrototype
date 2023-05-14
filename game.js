@@ -1,6 +1,6 @@
 class Main extends AdventureScene {
     constructor() {
-        super("main", "main Room");
+        super("main", "main room");
     }
 
     onEnter() {
@@ -11,7 +11,7 @@ class Main extends AdventureScene {
             .setInteractive()
             .on('pointerover', () => this.showMessage("you"));
 
-        let doorL = this.add.text(this.w * 0.55, this.h * 0.5, "unlocked door 🚪")
+        let doorL = this.add.text(this.w * 0.03, this.h * 0.5, "🚪 unlocked door")
             .setStyle({ fontSize: `${2 * this.s}px`, color: '#222' })
             .setInteractive()
             .on('pointerover', () => {
@@ -31,7 +31,7 @@ class Main extends AdventureScene {
                 this.gotoScene('down');
             });
 
-        let doorR = this.add.text(this.w * 0.03, this.h * 0.5, "🚪 unlocked door")
+        let doorR = this.add.text(this.w * 0.55, this.h * 0.5, "unlocked door 🚪")
             .setStyle({ fontSize: `${2 * this.s}px`, color: '#222' })
             .setInteractive()
             .on('pointerover', () => {
@@ -63,17 +63,15 @@ class Main extends AdventureScene {
             .setStyle({ fontSize: `${2 * this.s}px`, color: '#222' })
             .setInteractive()
             .on('pointerover', () => {
-                if (this.hasItem("key")) {
-                    this.showMessage("You've got the key for this door.");
+                if (this.hasItem("⓿")) {
+                    this.showMessage("you can see this door was never truely locked.");
                 } else {
                     this.showMessage("it's locked. can you find a way to open it?");
                 }
             })
             .on('pointerdown', () => {
-                if (this.hasItem("key")) {
-                    this.loseItem("key");
-                    this.showMessage("*squeak*");
-                    door.setText("🚪 unlocked door");
+                if (this.hasItem("⓿")) {
+                    doorTop.setText("🚪 unlocked door");
                     this.gotoScene('top');
                 }
             })
@@ -81,9 +79,9 @@ class Main extends AdventureScene {
     }
 }
 
-class Left extends AdventureScene {
+class Right extends AdventureScene {
     constructor() {
-        super("left", "left Room");
+        super("right", "right room");
     }
     onEnter() {
         this.add.text(this.w * 0.03, this.h * 0.5, "🚪 go back")
@@ -96,7 +94,7 @@ class Left extends AdventureScene {
                 this.gotoScene('main');
             });
 
-        let wizard = this.add.text(this.w * 0.6, this.w * 0.2, '🧙‍♂️')
+        let wizard = this.add.text(this.w * 0.6, this.h * 0.4, '🧙‍♂️')
             .setStyle({ fontSize: `${4 * this.s}px`})
             .setInteractive()
             .on('pointerover', () => {
@@ -118,63 +116,78 @@ class Left extends AdventureScene {
 
 class Down extends AdventureScene {
     constructor() {
-        super("down", "Bottom Room");
+        super("down", "bottom room");
     }
     onEnter() {
-        this.add.text(this.w * 0.3, this.w * 0.4, "just go back")
+        this.add.text(this.w * 0.3, this.h * 0.03, "🚪 go back")
             .setStyle({ fontSize: `${2 * this.s}px`, color: '#222' })
             .setInteractive()
             .on('pointerover', () => {
-                this.showMessage("You've got no other choice, really.");
+                this.showMessage("head back");
             })
             .on('pointerdown', () => {
                 this.gotoScene('main');
             });
+        this.add.text(this.w * 0.3, this.h * 0.8, "📺",{fontSize: `${8 * this.s}px`})
+            .setInteractive()
+            .on('pointerover', () => this.showMessage("head back"));
 
-        let finish = this.add.text(this.w * 0.6, this.w * 0.2, '(finish the game)')
+        let tape = this.add.text(this.w * 0.6, this.w * 0.2, '📼',{fontSize: `${2 * this.s}px`})
             .setInteractive()
             .on('pointerover', () => {
-                this.showMessage('*giggles*');
-                this.tweens.add({
-                    targets: finish,
-                    x: this.s + (this.h - 2 * this.s) * Math.random(),
-                    y: this.s + (this.h - 2 * this.s) * Math.random(),
-                    ease: 'Sine.inOut',
-                    duration: 500
-                });
+                this.showMessage('watch?');    
             })
-            .on('pointerdown', () => this.gotoScene('outro'));
+            .on('pointerdown', () => {
+                this.tweens.add({
+                    targets: tape,
+                    x: this.w * 0.33,
+                    y: this.h * 0.9,
+                    ease: 'Sine.inOut',
+                    duration: 1500,
+                    onComplete: ()=> {
+                        this.tweens.add({
+                            targets: tape,
+                            alpha: 0,
+                            duration: 700,
+                            onComplete: ()=> {
+                                this.showMessage('you learned something about yourself')
+                                tape.destroy()}})
+                }});
+            });
     }
 }
 
-class Right extends AdventureScene {
+class Left extends AdventureScene {
     constructor() {
-        super("right", "Right Room");
+        super("left", "left room");
     }
     onEnter() {
-        this.add.text(this.w * 0.3, this.w * 0.4, "just go back")
+        this.add.text(this.w * 0.55, this.h * 0.5, "go back 🚪")
             .setStyle({ fontSize: `${2 * this.s}px`, color: '#222' })
             .setInteractive()
             .on('pointerover', () => {
-                this.showMessage("You've got no other choice, really.");
+                this.showMessage("head back");
             })
             .on('pointerdown', () => {
                 this.gotoScene('main');
             });
 
-        let finish = this.add.text(this.w * 0.6, this.w * 0.2, '(finish the game)')
+        let cupcake = this.add.text(this.w * 0.14, this.h * 0.3, '🧁',{fontSize:`${4 * this.s}px`})
             .setInteractive()
             .on('pointerover', () => {
-                this.showMessage('*giggles*');
-                this.tweens.add({
-                    targets: finish,
-                    x: this.s + (this.h - 2 * this.s) * Math.random(),
-                    y: this.s + (this.h - 2 * this.s) * Math.random(),
-                    ease: 'Sine.inOut',
-                    duration: 500
-                });
+                this.showMessage('this looks good, maybe a bit dry');
+                
             })
-            .on('pointerdown', () => this.gotoScene('outro'));
+            .on('pointerdown', () => {
+                this.gainItem('🧁')
+                this.tweens.add({
+                    targets: cupcake,
+                    alpha: 0,
+                    duration: 500,
+                    onComplete: ()=> {
+                        cupcake.destroy();}
+                });
+            });
     }
 }
 
@@ -183,29 +196,38 @@ class Top extends AdventureScene {
         super("top", "Top Room");
     }
     onEnter() {
-        this.add.text(this.w * 0.3, this.w * 0.4, "just go back")
+        this.add.text(this.w * 0.3, this.h * 0.03, "🚪 go ahead")
             .setStyle({ fontSize: `${2 * this.s}px`, color: '#222' })
             .setInteractive()
             .on('pointerover', () => {
-                this.showMessage("You've got no other choice, really.");
+                this.showMessage("leave");
+            })
+            .on('pointerdown', () => {
+                this.gotoScene('outro');
+            });
+
+        this.add.text(this.w * 0.3, this.h * 0.95, "🚪 go back")
+            .setStyle({ fontSize: `${2 * this.s}px`, color: '#222' })
+            .setInteractive()
+            .on('pointerover', () => {
+                this.showMessage("head back");
             })
             .on('pointerdown', () => {
                 this.gotoScene('main');
             });
 
-        let finish = this.add.text(this.w * 0.6, this.w * 0.2, '(finish the game)')
-            .setInteractive()
-            .on('pointerover', () => {
-                this.showMessage('*giggles*');
-                this.tweens.add({
-                    targets: finish,
-                    x: this.s + (this.h - 2 * this.s) * Math.random(),
-                    y: this.s + (this.h - 2 * this.s) * Math.random(),
-                    ease: 'Sine.inOut',
-                    duration: 500
+        if(this.hasItem("🧁")){
+            let milk = this.add.text(this.w * 0.3, this.h * 0.4, "🥛")
+                .setStyle({ fontSize: `${2 * this.s}px`, color: '#222' })
+                .setInteractive()
+                .on('pointerover', () => {
+                    this.showMessage("this would go great with the cupcake. drink?");
+                })
+                .on('pointerdown', () => {
+                    milk.destroy();
+                    this.loseItem("🧁")
                 });
-            })
-            .on('pointerdown', () => this.gotoScene('outro'));
+        }
     }
 }
 
@@ -231,8 +253,8 @@ class Outro extends Phaser.Scene {
     }
     create() {
         this.cameras.main.setBackgroundColor('#ddd');
-        this.add.text(50, 50, "That's all!").setStyle({ fontSize: '70px', color: '0x000' });
-        this.add.text(55, 120, "Click anywhere to restart.").setStyle({ fontSize: '30px', color: '0x000' });
+        this.add.text(300, 50, "thanks for playing").setStyle({ fontSize: '70px', color: '0x000' });
+        this.add.text(600, 300, "click anywhere to restart").setStyle({ fontSize: '30px', color: '0x000' });
         this.input.on('pointerdown', () => this.scene.start('intro'));
     }
 }

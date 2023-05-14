@@ -34,7 +34,7 @@ class AdventureScene extends Phaser.Scene {
 
         this.inventoryBanner = this.add.text(this.w * 0.75 + this.s, this.h * 0.66)
             .setStyle({ fontSize: `${2 * this.s}px` })
-            .setText("Inventory")
+            .setText("inventory")
             .setAlpha(0);
 
         this.inventoryTexts = [];
@@ -43,7 +43,7 @@ class AdventureScene extends Phaser.Scene {
         this.add.text(this.w-3*this.s, this.h-3*this.s, "📺")
             .setStyle({ fontSize: `${2 * this.s}px` })
             .setInteractive({useHandCursor: true})
-            .on('pointerover', () => this.showMessage('Fullscreen?'))
+            .on('pointerover', () => this.showMessage('fullscreen?'))
             .on('pointerdown', () => {
                 if (this.scale.isFullscreen) {
                     this.scale.stopFullscreen();
